@@ -29,7 +29,7 @@ $app->run();
 <p id="navi">| ヘルプ | ランキング | よくある質問 | 個人情報保護方針 | 会社概要<p>
 <p><?= h($app->me()->name); ?>さん - (<?= h($app->me()->email); ?>)</p>
 <hr><br>
-<iframe src="http://160.16.117.80:8080/" id="frame"></iframe>
+<iframe src="" id="frame"></iframe>
 	<div id="container">
 		<h2>オンライン中の弁護士</h2>
 			<!-- <ul>
