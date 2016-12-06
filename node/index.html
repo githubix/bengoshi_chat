@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>bengoshi-chat</title>
+<style>
+  body {
+    font-family:Arial, sans-serif;
+    font-size:13px;
+    margin:0;
+    padding:0;
+    background:#FFFFDD;
+  }
+  header {
+    margin:0;
+    padding: 6px;
+    background: #444444;
+
+  }
+  .line{
+    width: 100%;
+    height: 3px;
+    background:#FF1A6F;
+  }
+  h1 {
+    margin:0;
+    padding: 3px;
+    color: #ffffff;
+    font-family: 游ゴシック体;
+  }
+  h2 {
+    font-size: 13px;
+    margin:0;
+    padding: 4px;
+    background: #FF1A6F;
+    color:#ffffff;
+    border-radius: 3px;
+    text-align:center;
+
+  }
+
+  ul#logs {
+    list-style-type: none;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    max-height:300px;
+  }
+  ul#logs li {
+    margin-left:0px;
+    padding:5px;
+    border:1px solid #FFF8DC;
+    border-radius: 3px;
+    background-color:#e6e6fa;
+  }
+  ul#list1 {
+    list-style-type: none;
+    font-weight: bold;
+    margin:0;
+    margin-left:0;
+    max-height:300px;
+  }
+  ul#list1 li{
+    float: left;
+    margin-left:0;
+    padding:0;
+    display:table;
+  }
+  ul#list1 li a{
+    display:table-cell;
+    margin-left:0;
+    vertical-align:middle;
+
+    padding:0;
+  }
+  #name {
+    width: 150px;
+    padding:5px;
+    border-radius: 3px;
+  }
+  #msg {
+    width: 250px;
+    padding:5px;
+    border-radius: 3px;
+  }
+  #button {
+    padding: 5px;
+    border-radius: 3px;
+    cursor:pointer;
+    background-color: #333;
+	  color: #fff;
+  }
+  #button:hover {
+	background-color: #59b1eb;
+　}
+  #ClockArea {
+    float: right;
+    color: #D3D3D3;
+  }
+  .box {
+    margin: 0;
+    width:100%;
+    height:400px;
+    border:3px solid #FFF8DC;
+    border-radius: 3px;
+    background-color:#F0F8FF;
+    float: left;
+
+  }
+  .box2 {
+    margin:0;
+    padding:0;
+    width: 0%;
+    height:300px;
+    border:3px solid #FFF8DC;
+    border-radius: 3px;
+    background-color:#F0F8FF;
+    float: right;
+  }
+  #log{
+    max-height:300px;
+  }
+  #exit{
+    margin-top:5px;
+    float:right;
+  }
+  .container {
+    margin: 6px;
+    position: relative;
+    height: auto !important;
+    height: 100%;
+    min-height: 100%;
+  }
+  p#navi {
+    text-align:right;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 16px;
+    color: #ffffff;
+    float: clear;
+    text-align: center;
+    background: #444444;
+  }
+</style>
+</head>
+<body>
+    <hr> -->
+    <form id="myForm">
+        <input type="text" id="name" placeholder="チャットネーム">&nbsp<input type="text" id="msg" placeholder="テキストを入力してください"> <input type="submit" value="送信" id="button">
+    </form>
+    <br>
+    <div class="box">
+    <ul id="logs"></ul>
+    </div>
+    <br><br>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function() {
+            var socket = io.connect();
+            // emit: イベントを発信している
+            // on: イベントを待ち受けている
+            $('#myForm').submit(function(e) {
+              e.preventDefault();
+              socket.json.emit('emit_from_client', {
+                  msg: $('#msg').val(),
+                  name: $('#name').val()
+              });
+                $('#msg').val('').focus();
+            });
+            socket.on('emit_from_server', function(data) {
+                $('#logs').append($('<li>').text(data));
+            });
+        });
+    </script>
+
+</body>
+</html>
