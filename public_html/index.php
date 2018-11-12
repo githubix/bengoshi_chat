@@ -40,7 +40,7 @@ $app->run();
 			<ul id="lawyer"></ul>
 		</div>
 		<br>
-		※社会通念上、不適切と思われる相談内容は、<b>こちら</b>にユーザ名および内容をご連絡ください。
+		※社会通念上、不適切と思われる相談内容は、<b>こちらのフォーム</b>にユーザ名および内容をご連絡ください。
 			<form action="logout.php" method="post" id="logout">
 				<input type="submit" value="退室する">
 				<input type="hidden" name="email" value="<?= h($app->me()->email); ?>">
